@@ -22,3 +22,5 @@ ln -sf rootdir/etc /buildroot/etc
 for subvol in .snapshots boot/efi opt root srv usr/local var ; do
     rm -rf /buildroot/rootdir/${subvol}/*
 done
+
+touch /buildroot/var/mydebug
