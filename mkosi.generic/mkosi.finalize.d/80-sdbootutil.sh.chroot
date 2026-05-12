@@ -5,10 +5,14 @@ loader_token=${IMAGE_ID%-$SUBIMAGE}
 title=${loader_token//-/ }
 loader_token=${loader_token,,}
 
+ESP_PATH="/boot"
+
 echo "*** Setup bootloader ($title) ***"
 
+find /efi
+
 rmdir /efi
-mkdir -p /boot/efi
+#mkdir -p /boot/efi
 
 case "$ARCHITECTURE" in
     arm64) arch=aa64 ;;
@@ -34,12 +38,12 @@ else
 fi
 
 sdbootutil -v --no-random-seed --arch "$arch" \
-	   --esp-path /boot/efi --entry-token=auto --no-variables \
+	   --esp-path "${ESP_PATH}" --entry-token=auto --no-variables \
 	   install
 
 export hostonly_l=no # for dracut
-sdbootutil -v --arch "$arch" --esp-path /boot/efi --entry-token=auto \
+sdbootutil -v --arch "$arch" --esp-path "${ESP_PATH}" --entry-token=auto \
 	   --rootfs="label" --rootfs-data="root-$ARCHITECTURE" \
 	   add-all-kernels
-sdbootutil -v --arch "$arch" --esp-path /boot/efi --no-variables \
+sdbootutil -v --arch "$arch" --esp-path "${ESP_PATH}" --no-variables \
 	   set-timeout 5

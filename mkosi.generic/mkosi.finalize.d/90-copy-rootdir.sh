@@ -19,6 +19,6 @@ ln -sf rootdir/etc /buildroot/etc
 
 # handle /etc as subvolume, because systemd-repart will create
 # the fstab file there later
-for subvol in .snapshots boot/efi opt root srv usr/local var ; do
+for subvol in .snapshots boot opt root srv usr/local var ; do
     rm -rf /buildroot/rootdir/${subvol}/*
 done
