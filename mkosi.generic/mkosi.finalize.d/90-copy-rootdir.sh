@@ -4,6 +4,8 @@ set -e
 
 echo "*** Copy root dir for systemd-repart ***"
 
+echo "myfile" > /buildroot/root/.myfile
+
 mkdir /buildroot/.rootdir
 cp -al /buildroot/* /buildroot/.rootdir/
 mv -v /buildroot/.rootdir /buildroot/rootdir/
