@@ -9,10 +9,9 @@ ESP_PATH="/boot"
 
 echo "*** Setup bootloader ($title) ***"
 
-find /efi
-
+# Created by mkosi, we don't need that, will only trigger
+# wrong decission by bootloader scripts
 rmdir /efi
-#mkdir -p /boot/efi
 
 case "$ARCHITECTURE" in
     arm64) arch=aa64 ;;
