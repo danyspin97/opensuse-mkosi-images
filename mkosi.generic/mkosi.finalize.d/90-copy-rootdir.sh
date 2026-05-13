@@ -17,8 +17,8 @@ rm -rf /buildroot/rootdir/work
 rm -rf /buildroot/etc
 ln -sf rootdir/etc /buildroot/etc
 
-# handle /etc as subvolume, because systemd-repart will create
-# the fstab file there later
+# cleanup subvolumes and directories which will be over-mounted
+# in the running system with the real data
 for subvol in .snapshots boot opt root srv usr/local var ; do
-    rm -rf /buildroot/rootdir/${subvol}/*
+	find /buildroot/rootdir/${subvol} -mindepth 1 -delete
 done
